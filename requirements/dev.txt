@@ -165,7 +165,7 @@ click==8.3.1 \
     --hash=sha256:12ff4785d337a1bb490bb7e9c2b1ee5da3112e94a8622f26a6c77f5d2fc6842a \
     --hash=sha256:981153a64e25f12d547d3426c367a4857371575ee7ad18df2a6183ab0545b2a6
     # via black
-coverage==7.13.1 \
+coverage[toml]==7.13.1 \
     --hash=sha256:0403f647055de2609be776965108447deb8e384fe4a553c119e3ff6bfbab4784 \
     --hash=sha256:0642eae483cc8c2902e4af7298bf886d605e80f26382124cddc3967c2a3df09e \
     --hash=sha256:0b609fc9cdbd1f02e51f67f51e5aee60a841ef58a68d00d5ee2c0faf357481a3 \
@@ -258,7 +258,9 @@ coverage==7.13.1 \
     --hash=sha256:ff10896fa55167371960c5908150b434b71c876dfab97b69478f22c8b445ea19 \
     --hash=sha256:ff86d4e85188bba72cfb876df3e11fa243439882c55957184af44a35bd5880b7 \
     --hash=sha256:ffed1e4980889765c84a5d1a566159e363b71d6b6fbaf0bebc9d3c30bc016766
-    # via -r dev.in
+    # via
+    #   -r dev.in
+    #   pytest-cov
 django==6.0.1 \
     --hash=sha256:a92a4ff14f664a896f9849009cb8afaca7abe0d6fc53325f3d1895a15253433d \
     --hash=sha256:ed76a7af4da21551573b3d9dfc1f53e20dd2e6c7d70a3adc93eedb6338130a5f
@@ -308,7 +310,9 @@ platformdirs==4.5.1 \
 pluggy==1.6.0 \
     --hash=sha256:7dcc130b76258d33b90f61b658791dede3486c3e6bfb003ee5c9bfb396dd22f3 \
     --hash=sha256:e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746
-    # via pytest
+    # via
+    #   pytest
+    #   pytest-cov
 pycparser==2.23 \
     --hash=sha256:78816d4f24add8f10a06d6f05b4d424ad9e96cfebf68a4ddc99c65c0720d00c2 \
     --hash=sha256:e5c6e8d3fbad53479cab09ac03729e0a9faf2bee3db8208a550daf5af81a5934
@@ -324,7 +328,12 @@ pytest==9.0.2 \
     --hash=sha256:75186651a92bd89611d1d9fc20f0b4345fd827c41ccd5c299a868a05d70edf11
     # via
     #   -r dev.in
+    #   pytest-cov
     #   pytest-django
+pytest-cov==7.0.0 \
+    --hash=sha256:33c97eda2e049a0c5298e91f519302a1334c26ac65c1a483d6206fd458361af1 \
+    --hash=sha256:3b8e9558b16cc1479da72058bdecf8073661c7f57f7d3c5f22a1c23507f2d861
+    # via -r dev.in
 pytest-django==4.11.1 \
     --hash=sha256:1b63773f648aa3d8541000c26929c1ea63934be1cfa674c76436966d73fe6a10 \
     --hash=sha256:a949141a1ee103cb0e7a20f1451d355f83f5e4a5d07bdd4dcfdd1fd0ff227991

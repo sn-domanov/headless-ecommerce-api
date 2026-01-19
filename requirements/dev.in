@@ -1,7 +1,9 @@
 -r base.txt
 
+django-stubs
 pytest
 pytest-django
+pytest-cov
 coverage
 black
 isort

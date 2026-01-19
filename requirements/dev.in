@@ -1,5 +1,6 @@
 -r base.txt
 
+django-stubs
 pytest
 pytest-django
 coverage

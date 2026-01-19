@@ -142,7 +142,17 @@ django==6.0.1 \
     --hash=sha256:ed76a7af4da21551573b3d9dfc1f53e20dd2e6c7d70a3adc93eedb6338130a5f
     # via
     #   -r base.txt
+    #   django-stubs
+    #   django-stubs-ext
     #   djangorestframework
+django-stubs==5.2.8 \
+    --hash=sha256:9bba597c9a8ed8c025cae4696803d5c8be1cf55bfc7648a084cbf864187e2f8b \
+    --hash=sha256:a3c63119fd7062ac63d58869698d07c9e5ec0561295c4e700317c54e8d26716c
+    # via -r dev.in
+django-stubs-ext==5.2.8 \
+    --hash=sha256:1dd5470c9675591362c78a157a3cf8aec45d0e7a7f0cf32f227a1363e54e0652 \
+    --hash=sha256:b39938c46d7a547cd84e4a6378dbe51a3dd64d70300459087229e5fee27e5c6b
+    # via django-stubs
 djangorestframework==3.16.1 \
     --hash=sha256:166809528b1aced0a17dc66c24492af18049f2c9420dbd0be29422029cfc3ff7 \
     --hash=sha256:33a59f47fb9c85ede792cbf88bde71893bcda0667bc573f784649521f1102cec
@@ -241,3 +251,13 @@ sqlparse==0.5.5 \
     # via
     #   -r base.txt
     #   django
+types-pyyaml==6.0.12.20250915 \
+    --hash=sha256:0f8b54a528c303f0e6f7165687dd33fafa81c807fcac23f632b63aa624ced1d3 \
+    --hash=sha256:e7d4d9e064e89a3b3cae120b4990cd370874d2bf12fa5f46c97018dd5d3c9ab6
+    # via django-stubs
+typing-extensions==4.15.0 \
+    --hash=sha256:0cea48d173cc12fa28ecabc3b837ea3cf6f38c6d1136f85cbaaf598984861466 \
+    --hash=sha256:f0fa19c6845758ab08074a0cfa8b7aecb71c999ca73d62883bc25cc018c4e548
+    # via
+    #   django-stubs
+    #   django-stubs-ext

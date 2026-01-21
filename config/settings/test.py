@@ -1,8 +1,6 @@
 # config/settings/test.py
 from .base import *
 
-SECRET_KEY = "7bhw!2f&^aooro4yy@i)a!+9l2(9y5lawy%1gn9%2b(=8ikr81"
-
 DEBUG = False
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]

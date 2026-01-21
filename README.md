@@ -8,6 +8,22 @@ Headless e-commerce backend built with Django REST Framework.
 
 Dependencies are managed using pip and are listed in `requirements/`.
 
+## Environment variables
+
+Copy `.env.template` to `.env`:
+
+```sh
+cp .env.template .env
+```
+
+Generate a secret key for development:
+
+```sh
+python -c "from django.core.management.utils import get_random_secret_key(); print(get_random_secret_key())"
+```
+
+Edit `.env` and replace `SECRET_KEY` with the generated key (use single quotes).
+
 ## Running locally
 
 ```sh

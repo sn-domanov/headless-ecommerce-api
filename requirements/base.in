@@ -1,3 +1,4 @@
 Django>=6.0
 djangorestframework
 argon2-cffi
+python-dotenv

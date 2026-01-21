@@ -12,3 +12,8 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+# Browsable API is enabled in development environment only
+REST_FRAMEWORK["DEFAULT_RENDERER_CLASSES"] += (
+    "rest_framework.renderers.BrowsableAPIRenderer",
+)

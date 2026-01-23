@@ -39,12 +39,16 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
+THIRD_PARTY_APPS = [
+    "rest_framework",
+]
+
 LOCAL_APPS = [
     "apps.accounts.apps.AccountsConfig",
     "apps.products.apps.ProductsConfig",
 ]
 
-INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -119,3 +123,13 @@ STATIC_URL = "static/"
 
 # Authentication
 AUTH_USER_MODEL = "accounts.User"
+
+# REST
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly",
+    ],
+    "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
+    "DEFAULT_PAGINATION_CLASS": "config.pagination.StandardPagination",
+    "PAGE_SIZE": 10,
+}

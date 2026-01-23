@@ -1,0 +1,14 @@
+from django.urls import include, path
+from rest_framework.routers import DefaultRouter
+
+from apps.products.api.v1 import views
+
+# TODO consider switching to SimpleRouter when browsable API is not needed anymore
+router = DefaultRouter()
+router.register("brands", views.BrandViewSet)
+router.register("categories", views.CategoryViewSet)
+router.register("products", views.ProductViewSet)
+
+urlpatterns = [
+    path("", include(router.urls)),
+]

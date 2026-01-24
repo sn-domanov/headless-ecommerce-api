@@ -17,7 +17,16 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ["id", "name", "parent", "parent_name"]
 
 
+class CategoryBriefSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ["id", "name"]
+
+
 class ProductSerializer(serializers.ModelSerializer):
+    brand = BrandSerializer(read_only=True)
+    category = CategoryBriefSerializer(read_only=True)
+
     class Meta:
         model = Product
         fields = ["id", "name", "description", "category", "brand", "is_digital"]

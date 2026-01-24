@@ -139,6 +139,5 @@ REST_FRAMEWORK = {
 SPECTACULAR_SETTINGS = {
     "TITLE": "Django DRF e-commerce",
     "DESCRIPTION": "Headless e-commerce backend built with Django REST Framework",
-    "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
 }

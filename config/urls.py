@@ -24,7 +24,11 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/v1/", include("apps.products.api.v1.urls.public")),
     path("api/v1/admin/", include("apps.products.api.v1.urls.admin")),
-    path("api/v1/schema/", SpectacularAPIView.as_view(), name="schema_v1"),
+    path(
+        "api/v1/schema/",
+        SpectacularAPIView.as_view(custom_settings={"VERSION": "1.0.0"}),
+        name="schema_v1",
+    ),
     path(
         "api/v1/docs/",
         SpectacularSwaggerView.as_view(

@@ -17,9 +17,18 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import include, path
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+from rest_framework.permissions import IsAuthenticated
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/v1/", include("apps.products.api.v1.urls.public")),
     path("api/v1/admin/", include("apps.products.api.v1.urls.admin")),
+    path("api/v1/schema/", SpectacularAPIView.as_view(), name="schema_v1"),
+    path(
+        "api/v1/docs/",
+        SpectacularSwaggerView.as_view(
+            url_name="schema_v1", permission_classes=[IsAuthenticated]
+        ),
+    ),
 ]

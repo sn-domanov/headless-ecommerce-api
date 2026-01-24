@@ -41,6 +41,7 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     "rest_framework",
+    "drf_spectacular",
 ]
 
 LOCAL_APPS = [
@@ -132,4 +133,12 @@ REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
     "DEFAULT_PAGINATION_CLASS": "config.pagination.StandardPagination",
     "PAGE_SIZE": 10,
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Django DRF e-commerce",
+    "DESCRIPTION": "Headless e-commerce backend built with Django REST Framework",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
 }

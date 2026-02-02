@@ -21,3 +21,8 @@ PASSWORD_HASHERS = [
 EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
 
 # MEDIA_ROOT = BASE_DIR / "test-media"
+
+# Bypass JWT in tests, use `client.force_authenticate(user=user)`
+REST_FRAMEWORK["DEFAULT_AUTHENTICATION_CLASSES"] = [
+    "rest_framework.authentication.SessionAuthentication",
+]

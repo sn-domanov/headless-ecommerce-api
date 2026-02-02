@@ -1,0 +1,20 @@
+@base_url = http://localhost:8000/api
+@access = paste_here_when_testing
+@refresh = paste_here_when_testing
+
+### Login
+POST {{base_url}}/token/
+Content-Type: application/json
+
+{
+    "email": "test@example.com",
+    "password": "Qq12345678"
+}
+
+### Refresh
+POST {{base_url}}/token/refresh/
+Content-Type: application/json
+
+{
+    "refresh": "{{refresh}}"
+}

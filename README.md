@@ -4,7 +4,7 @@ Headless e-commerce backend built with Django REST Framework.
 
 ## Requirements
 
-- Python 3.12+
+- Python 3.13+
 
 Dependencies are managed using pip and are listed in `requirements/`.
 
@@ -50,9 +50,72 @@ pytest
 The project uses environment-specific settings:
 - `config.settings.dev` – local development
 - `config.settings.test` – automated tests
+
 The default settings module is `config.settings.dev`.
 
 ## Admin panel
 
 The Django admin panel is available at:
 http://127.0.0.1:8000/admin/
+
+## JWT Authentication
+
+This project uses [SimpleJWT](https://django-rest-framework-simplejwt.readthedocs.io/) for JWT-based authentication.
+
+**Endpoints:**
+
+| Path                 | Method | Purpose                                  |
+|----------------------|--------|------------------------------------------|
+| `/api/token/`        | POST   | Obtain access and refresh tokens         |
+| `/api/token/refresh/`| POST   | Refresh access token using refresh token |
+
+### Obtain tokens
+
+```http
+POST /api/token/
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "Qq12345678"
+}
+```
+
+Response:
+
+```json
+{
+  "access": "eyJ0eXAiOiJKV1QiLCJh...",
+  "refresh": "eyJ0eXAiOiJKV1QiLCJh..."
+}
+```
+
+### Refresh access token
+
+Refresh tokens are rotated and blacklisted each time the `/api/token/refresh/` endpoint is called. Each refresh request returns:
+- a new access token
+- a new refresh token
+
+Add a cron job `python manage.py flushexpiredtokens` to remove expired OutstandingTokens and BlacklistedTokens, preventing the token tables from growing indefinitely.
+
+```http
+POST /api/token/refresh/
+Content-Type: application/json
+
+{
+  "refresh": "<your refresh token here>"
+}
+```
+
+Response:
+
+```json
+{
+  "access": "eyJ0eXAiOiJKV1QiLCJh...",
+  "refresh": "eyJ0eXAiOiJKV1QiLCJh..."
+}
+```
+
+### Testing with REST Client
+
+All JWT endpoints can be tested via the included `http/auth.http` file with the [VS Code REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client).

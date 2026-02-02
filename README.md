@@ -58,21 +58,27 @@ The default settings module is `config.settings.dev`.
 The Django admin panel is available at:
 http://127.0.0.1:8000/admin/
 
-## JWT Authentication
+## Authentication
 
-This project uses [SimpleJWT](https://django-rest-framework-simplejwt.readthedocs.io/) for JWT-based authentication.
+This project uses [Djoser](https://djoser.readthedocs.io/) for user management and
+[SimpleJWT](https://django-rest-framework-simplejwt.readthedocs.io/) for JWT-based authentication.
 
 **Endpoints:**
 
-| Path                 | Method | Purpose                                  |
-|----------------------|--------|------------------------------------------|
-| `/api/token/`        | POST   | Obtain access and refresh tokens         |
-| `/api/token/refresh/`| POST   | Refresh access token using refresh token |
+| Path                     | Method | Purpose                                  |
+|--------------------------|--------|------------------------------------------|
+| `/api/auth/jwt/create/`  | POST   | Obtain access and refresh tokens         |
+| `/api/auth/jwt/refresh/` | POST   | Refresh access token                     |
+| `/api/auth/jwt/verify/`  | POST   | Verify access token                      |
+| `/api/auth/users/me/`    | GET    | Get current authenticated user           |
+
+For all user-related endpoints see [Djoser docs](https://djoser.readthedocs.io/en/latest/getting_started.html)
+
 
 ### Obtain tokens
 
 ```http
-POST /api/token/
+POST /api/auth/jwt/create/
 Content-Type: application/json
 
 {
@@ -92,14 +98,12 @@ Response:
 
 ### Refresh access token
 
-Refresh tokens are rotated and blacklisted each time the `/api/token/refresh/` endpoint is called. Each refresh request returns:
-- a new access token
-- a new refresh token
+Refresh tokens are rotated and blacklisted each time the `/api/auth/jwt/refresh/` endpoint is called.
 
 Add a cron job `python manage.py flushexpiredtokens` to remove expired OutstandingTokens and BlacklistedTokens, preventing the token tables from growing indefinitely.
 
 ```http
-POST /api/token/refresh/
+POST /api/auth/jwt/refresh/
 Content-Type: application/json
 
 {
@@ -114,6 +118,24 @@ Response:
   "access": "eyJ0eXAiOiJKV1QiLCJh...",
   "refresh": "eyJ0eXAiOiJKV1QiLCJh..."
 }
+```
+
+### Verify access token
+
+```http
+POST /api/auth/jwt/verify/
+Content-Type: application/json
+
+{
+  "token": "<your access token here>"
+}
+```
+
+### Get current user
+
+```http
+GET /api/auth/users/me/
+Authorization: Bearer <access token>
 ```
 
 ### Testing with REST Client

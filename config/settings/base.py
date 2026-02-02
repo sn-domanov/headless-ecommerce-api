@@ -45,6 +45,7 @@ THIRD_PARTY_APPS = [
     "drf_spectacular",
     # Add cron job `python manage.py flushexpiredtokens` to remove both blacklisted and outstanding tokens
     "rest_framework_simplejwt.token_blacklist",
+    "djoser",
     "corsheaders",
 ]
 
@@ -134,6 +135,13 @@ AUTH_USER_MODEL = "accounts.User"
 SIMPLE_JWT = {
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,
+}
+
+DJOSER = {
+    "LOGIN_FIELD": "email",
+    "USER_CREATE_PASSWORD_RETYPE": True,
+    "SET_PASSWORD_RETYPE": True,
+    "PASSWORD_RESET_CONFIRM_RETYPE": True,
 }
 
 # REST

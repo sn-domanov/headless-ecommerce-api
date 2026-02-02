@@ -16,19 +16,15 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework.permissions import IsAuthenticated
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    # JWT
-    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
-    path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    # Auth (Djoser + JWT)
+    re_path(r"^api/auth/", include("djoser.urls")),
+    re_path(r"^api/auth/", include("djoser.urls.jwt")),
     # Products
     path("api/v1/", include("apps.products.api.v1.urls.public")),
     path("api/v1/admin/", include("apps.products.api.v1.urls.admin")),

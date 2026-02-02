@@ -21,3 +21,8 @@ REST_FRAMEWORK["DEFAULT_RENDERER_CLASSES"] += (
 REST_FRAMEWORK["DEFAULT_AUTHENTICATION_CLASSES"] += (
     "rest_framework.authentication.SessionAuthentication",
 )
+
+# Security
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]

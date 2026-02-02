@@ -45,6 +45,7 @@ THIRD_PARTY_APPS = [
     "drf_spectacular",
     # Add cron job `python manage.py flushexpiredtokens` to remove both blacklisted and outstanding tokens
     "rest_framework_simplejwt.token_blacklist",
+    "corsheaders",
 ]
 
 LOCAL_APPS = [
@@ -57,6 +58,8 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    # corsheaders
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",

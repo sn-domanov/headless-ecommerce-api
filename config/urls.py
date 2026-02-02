@@ -16,14 +16,19 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework.permissions import IsAuthenticated
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    # Auth (Djoser + JWT)
+    re_path(r"^api/auth/", include("djoser.urls")),
+    re_path(r"^api/auth/", include("djoser.urls.jwt")),
+    # Products
     path("api/v1/", include("apps.products.api.v1.urls.public")),
     path("api/v1/admin/", include("apps.products.api.v1.urls.admin")),
+    # Swagger
     path(
         "api/v1/schema/",
         SpectacularAPIView.as_view(custom_settings={"VERSION": "1.0.0"}),

@@ -3,3 +3,6 @@ djangorestframework
 argon2-cffi
 python-dotenv
 drf-spectacular
+djangorestframework-simplejwt
+djoser
+django-cors-headers

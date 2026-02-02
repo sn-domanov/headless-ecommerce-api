@@ -17,3 +17,12 @@ DATABASES = {
 REST_FRAMEWORK["DEFAULT_RENDERER_CLASSES"] += (
     "rest_framework.renderers.BrowsableAPIRenderer",
 )
+# Add session authentication for browsable API and Swagger
+REST_FRAMEWORK["DEFAULT_AUTHENTICATION_CLASSES"] += (
+    "rest_framework.authentication.SessionAuthentication",
+)
+
+# Security
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]

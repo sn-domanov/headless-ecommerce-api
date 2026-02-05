@@ -20,11 +20,17 @@ from django.urls import include, path, re_path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework.permissions import IsAuthenticated
 
+from apps.accounts import views as accounts_views
+
 urlpatterns = [
     path("admin/", admin.site.urls),
-    # Auth (Djoser + JWT)
+    # Secure HttpOnly cookie JWT auth
+    path("api/auth/jwt/create/", accounts_views.CookieTokenCreateView.as_view()),
+    path("api/auth/jwt/refresh/", accounts_views.CookieTokenRefreshView.as_view()),
+    path("api/auth/jwt/verify/", accounts_views.CookieTokenVerifyView.as_view()),
+    path("api/auth/jwt/logout/", accounts_views.LogoutView.as_view()),
+    # Djoser + JWT: registration, activation, password reset
     re_path(r"^api/auth/", include("djoser.urls")),
-    re_path(r"^api/auth/", include("djoser.urls.jwt")),
     # Products
     path("api/v1/", include("apps.products.api.v1.urls.public")),
     path("api/v1/admin/", include("apps.products.api.v1.urls.admin")),

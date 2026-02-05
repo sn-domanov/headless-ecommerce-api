@@ -17,8 +17,10 @@ DATABASES = {
 REST_FRAMEWORK["DEFAULT_RENDERER_CLASSES"] += (
     "rest_framework.renderers.BrowsableAPIRenderer",
 )
-# Add session authentication for browsable API and Swagger
 REST_FRAMEWORK["DEFAULT_AUTHENTICATION_CLASSES"] += (
+    # JWT auth via Authorization header. Does nothing in the current setup, disabled.
+    # "rest_framework_simplejwt.authentication.JWTAuthentication",
+    # Browsable API and Swagger
     "rest_framework.authentication.SessionAuthentication",
 )
 

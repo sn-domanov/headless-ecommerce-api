@@ -43,7 +43,6 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     "rest_framework",
     "drf_spectacular",
-    # Add cron job `python manage.py flushexpiredtokens` to remove both blacklisted and outstanding tokens
     "rest_framework_simplejwt.token_blacklist",
     "djoser",
     "corsheaders",
@@ -133,6 +132,8 @@ STATIC_URL = "static/"
 AUTH_USER_MODEL = "accounts.User"
 
 SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,
 }
@@ -152,7 +153,7 @@ REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
     "DEFAULT_PAGINATION_CLASS": "config.pagination.StandardPagination",
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "apps.accounts.authentication.CookieJWTAuthentication"
     ],
     "PAGE_SIZE": 10,
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
@@ -163,3 +164,6 @@ SPECTACULAR_SETTINGS = {
     "DESCRIPTION": "Headless e-commerce backend built with Django REST Framework",
     "SERVE_INCLUDE_SCHEMA": False,
 }
+
+# Security
+CORS_ALLOW_CREDENTIALS = True

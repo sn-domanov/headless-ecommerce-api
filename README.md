@@ -63,6 +63,9 @@ http://127.0.0.1:8000/admin/
 This project uses [Djoser](https://djoser.readthedocs.io/) for user management and
 [SimpleJWT](https://django-rest-framework-simplejwt.readthedocs.io/) for JWT-based authentication.
 
+**Cookie-based JWT**: Access and refresh tokens are stored in **HttpOnly cookies**.  
+This prevents JavaScript from reading tokens directly, improving security.
+
 **Endpoints:**
 
 | Path                     | Method | Purpose                                  |
@@ -70,6 +73,7 @@ This project uses [Djoser](https://djoser.readthedocs.io/) for user management a
 | `/api/auth/jwt/create/`  | POST   | Obtain access and refresh tokens         |
 | `/api/auth/jwt/refresh/` | POST   | Refresh access token                     |
 | `/api/auth/jwt/verify/`  | POST   | Verify access token                      |
+| `/api/auth/jwt/logout/`  | POST   | Logout user (delete cookies, blacklist refresh token) |
 | `/api/auth/users/me/`    | GET    | Get current authenticated user           |
 
 For all user-related endpoints see [Djoser docs](https://djoser.readthedocs.io/en/latest/getting_started.html)
@@ -91,10 +95,11 @@ Response:
 
 ```json
 {
-  "access": "eyJ0eXAiOiJKV1QiLCJh...",
-  "refresh": "eyJ0eXAiOiJKV1QiLCJh..."
+  "detail": "Login successful"
 }
 ```
+
+Tokens are set as HttpOnly cookies: access_token and refresh_token.
 
 ### Refresh access token
 
@@ -105,37 +110,64 @@ Add a cron job `python manage.py flushexpiredtokens` to remove expired Outstandi
 ```http
 POST /api/auth/jwt/refresh/
 Content-Type: application/json
-
-{
-  "refresh": "<your refresh token here>"
-}
+# Cookie-based, no body needed
 ```
 
 Response:
 
 ```json
 {
-  "access": "eyJ0eXAiOiJKV1QiLCJh...",
-  "refresh": "eyJ0eXAiOiJKV1QiLCJh..."
+  "detail": "Token refreshed"
 }
 ```
+
+Tokens are set as HttpOnly cookies: access_token and refresh_token.
 
 ### Verify access token
 
 ```http
 POST /api/auth/jwt/verify/
 Content-Type: application/json
+# Cookie-based, no body needed
+```
 
+Response:
+
+```json
 {
-  "token": "<your access token here>"
+  "detail": "Token valid"
 }
 ```
+
+Returns 401 if the token is missing or invalid.
+
+## Logout
+
+```http
+POST /auth/jwt/logout/
+Content-Type: application/json
+# Cookie-based, no body needed; idempotent
+```
+
+- Deletes access_token and refresh_token cookies
+- Blacklists the refresh token
+- Idempotent: calling logout multiple times is safe
+- Returns HTTP 204 on success
 
 ### Get current user
 
 ```http
 GET /api/auth/users/me/
-Authorization: Bearer <access token>
+# Cookie-based, no Authorization header needed
+```
+
+Response:
+
+```json
+{
+  "id": 2,
+  "email": "test@example.com"
+}
 ```
 
 ### Testing with REST Client

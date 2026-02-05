@@ -1,6 +1,4 @@
 @base_url = http://localhost:8000/api
-@access = paste_here_when_testing
-@refresh = paste_here_when_testing
 
 ### Login
 POST {{base_url}}/auth/jwt/create/ HTTP/1.1
@@ -14,19 +12,18 @@ Content-Type: application/json
 ### Refresh
 POST {{base_url}}/auth/jwt/refresh/ HTTP/1.1
 Content-Type: application/json
-
-{
-    "refresh": "{{refresh}}"
-}
+# Cookie-based, no body needed
 
 ### Verify
 POST {{base_url}}/auth/jwt/verify/ HTTP/1.1
 Content-Type: application/json
+# Cookie-based, no body needed
 
-{
-    "token": "{{access}}"
-}
+### Logout
+POST {{base_url}}/auth/jwt/logout/ HTTP/1.1
+Content-Type: application/json
+# Cookie-based, no body needed; idempotent
 
 ### Get current user
 GET {{base_url}}/auth/users/me/
-Authorization: Bearer {{access}}
+# Cookie-based, no Authorization header needed

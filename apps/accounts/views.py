@@ -104,8 +104,12 @@ class LogoutView(APIView):
     def post(self, request: Request):
         refresh = request.COOKIES.get("refresh_token")
         if refresh:
-            token = RefreshToken(refresh)  # pyright: ignore[reportArgumentType]
-            token.blacklist()
+            try:
+                token = RefreshToken(refresh)  # pyright: ignore[reportArgumentType]
+                token.blacklist()
+            # Logout should never fail
+            except TokenError:
+                pass  # already invalid / expired / blacklisted
 
         response = Response(status=204)
         response.delete_cookie("access_token")

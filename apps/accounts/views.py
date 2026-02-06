@@ -93,8 +93,8 @@ class CookieTokenVerifyView(TokenVerifyView):
         try:
             AccessToken(token)  # pyright: ignore[reportArgumentType]
             return Response({"detail": "Token valid"}, status=200)
-        except TokenError as e:
-            return Response({"detail": str(e)}, status=401)
+        except TokenError:
+            return Response({"detail": "Invalid or expired token"}, status=401)
 
 
 class LogoutView(APIView):

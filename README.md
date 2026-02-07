@@ -1,4 +1,4 @@
-# Headless E-commerce API
+# Ecommerce API
 
 Headless e-commerce backend built with Django REST Framework.
 
@@ -68,13 +68,17 @@ This prevents JavaScript from reading tokens directly, improving security.
 
 **Endpoints:**
 
-| Path                     | Method | Purpose                                  |
-|--------------------------|--------|------------------------------------------|
-| `/api/auth/jwt/create/`  | POST   | Obtain access and refresh tokens         |
-| `/api/auth/jwt/refresh/` | POST   | Refresh access token                     |
-| `/api/auth/jwt/verify/`  | POST   | Verify access token                      |
-| `/api/auth/jwt/logout/`  | POST   | Logout user (delete cookies, blacklist refresh token) |
-| `/api/auth/users/me/`    | GET    | Get current authenticated user           |
+| Path                                          | Method | Purpose                                               |
+|-----------------------------------------------|--------|-------------------------------------------------------|
+| `/api/auth/jwt/create/`                       | POST   | Obtain access and refresh tokens                      |
+| `/api/auth/jwt/refresh/`                      | POST   | Refresh access token                                  |
+| `/api/auth/jwt/verify/`                       | POST   | Verify access token                                   |
+| `/api/auth/jwt/logout/`                       | POST   | Logout user (delete cookies, blacklist refresh token) |
+| `/api/auth/users/`                            | POST   | Create user (signup)                                  |
+| `/api/auth/users/me/`                         | GET    | Get current authenticated user                        |
+| `/api/auth/users/reset_password/`             | POST   | Request password reset email                          |
+| `/api/auth/users/reset_password_confirm/`     | POST   | Confirm password reset                                |
+
 
 For all user-related endpoints see [Djoser docs](https://djoser.readthedocs.io/en/latest/getting_started.html)
 
@@ -86,7 +90,7 @@ POST /api/auth/jwt/create/
 Content-Type: application/json
 
 {
-  "email": "test@example.com",
+  "email": "user@example.com",
   "password": "Qq12345678"
 }
 ```
@@ -144,7 +148,7 @@ Returns 401 if the token is missing or invalid.
 ## Logout
 
 ```http
-POST /auth/jwt/logout/
+POST /api/auth/jwt/logout/
 Content-Type: application/json
 # Cookie-based, no body needed; idempotent
 ```
@@ -153,6 +157,28 @@ Content-Type: application/json
 - Blacklists the refresh token
 - Idempotent: calling logout multiple times is safe
 - Returns HTTP 204 on success
+
+### Create user (signup)
+
+```http
+POST /api/auth/users/
+Content-Type: application/json
+
+{
+    "email": "user@example.com",
+    "password": "Qq12345678",
+    "re_password": "Qq12345678"
+}
+```
+
+Response:
+
+```json
+{
+  "email": "user@example.com",
+  "id": 2
+}
+```
 
 ### Get current user
 
@@ -166,10 +192,49 @@ Response:
 ```json
 {
   "id": 2,
-  "email": "test@example.com"
+  "email": "user@example.com"
 }
 ```
 
+### Request password reset email
+
+```http
+POST /api/auth/users/reset_password/
+Content-Type: application/json
+
+{
+  "email": "user@example.com"
+}
+```
+
+Response:
+
+Returns HTTP 204 on success.
+
+After requesting a password reset, check the console email output.
+The reset link looks like:
+`/reset-password/<uid>/<token>/`
+
+Use `<uid>` and `<token>` (remove the line break and the trailing `=` character) in password reset confirmation request.
+
+### Confirm password reset
+
+```http
+POST /api/auth/users/reset_password_confirm/
+Content-Type: application/json
+
+{
+  "uid": "<uid>",
+  "token": "<token>",
+  "new_password": "NewStrongPassword123!",
+  "re_new_password": "NewStrongPassword123!"
+}
+```
+
+Response:
+
+Returns HTTP 204 on success.
+
 ### Testing with REST Client
 
-All JWT endpoints can be tested via the included `http/auth.http` file with the [VS Code REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client).
+All JWT endpoints can be tested via the included `http/auth.http` file with the [VS Code REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client). The file uses variables that must be filled manually (email, passwords, UID, reset token).

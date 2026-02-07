@@ -38,6 +38,7 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
 ]
 
 THIRD_PARTY_APPS = [
@@ -128,6 +129,12 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+SITE_ID = 1
+
+# Email
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+DEFAULT_FROM_EMAIL = "noreply@ecommerce.local"
+
 # Authentication
 AUTH_USER_MODEL = "accounts.User"
 
@@ -142,6 +149,7 @@ DJOSER = {
     "LOGIN_FIELD": "email",
     "USER_CREATE_PASSWORD_RETYPE": True,
     "SET_PASSWORD_RETYPE": True,
+    "PASSWORD_RESET_CONFIRM_URL": "reset-password/confirm/{uid}/{token}",
     "PASSWORD_RESET_CONFIRM_RETYPE": True,
 }
 

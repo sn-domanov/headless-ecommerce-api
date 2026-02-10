@@ -8,7 +8,7 @@ from apps.accounts.models import User
 class UserAdmin(BaseUserAdmin):
     model = User
     ordering = ("email",)
-    list_display = ("email", "is_staff", "is_superuser")
+    list_display = ("email", "is_active", "is_staff", "is_superuser")
     search_fields = ("email",)
 
     # Skip user creation and change forms in this project

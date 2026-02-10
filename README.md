@@ -66,6 +66,8 @@ This project uses [Djoser](https://djoser.readthedocs.io/) for user management a
 **Cookie-based JWT**: Access and refresh tokens are stored in **HttpOnly cookies**.  
 This prevents JavaScript from reading tokens directly, improving security.
 
+Users created via the API are inactive by default. An activation link is emailed to the user after signup.
+
 **Endpoints:**
 
 | Path                                          | Method | Purpose                                               |
@@ -74,6 +76,8 @@ This prevents JavaScript from reading tokens directly, improving security.
 | `/api/auth/jwt/refresh/`                      | POST   | Refresh access token                                  |
 | `/api/auth/jwt/verify/`                       | POST   | Verify access token                                   |
 | `/api/auth/jwt/logout/`                       | POST   | Logout user (delete cookies, blacklist refresh token) |
+| `/api/auth/users/activation/`                 | POST   | Activate a user account                               |
+| `/api/auth/users/resend_activation/`          | POST   | Re-send activation email                              |
 | `/api/auth/users/`                            | POST   | Create user (signup)                                  |
 | `/api/auth/users/me/`                         | GET    | Get current authenticated user                        |
 | `/api/auth/users/reset_password/`             | POST   | Request password reset email                          |
@@ -82,6 +86,72 @@ This prevents JavaScript from reading tokens directly, improving security.
 
 For all user-related endpoints see [Djoser docs](https://djoser.readthedocs.io/en/latest/getting_started.html)
 
+### Create user (signup)
+
+```http
+POST /api/auth/users/
+Content-Type: application/json
+
+{
+    "email": "user@example.com",
+    "password": "Qq12345678",
+    "re_password": "Qq12345678"
+}
+```
+
+Response:
+
+```json
+{
+  "email": "user@example.com",
+  "id": 2
+}
+```
+
+After creating a user, check the console email output.
+The activation link looks like:
+`/activate/<uid>/<token>/`
+
+Use `<uid>` and `<token>` (remove the line break and the trailing `=` character) in user activation request.
+
+### Activate user
+
+```http
+POST /api/auth/users/activation/
+Content-Type: application/json
+
+{
+    "uid": "2",
+    "token": "user_activation_token"
+}
+```
+
+Response:
+
+Returns HTTP 204 on success.
+
+### Resend user activation email
+
+Note that no email would be sent if the user is already active or if they don’t have a usable password.
+
+```http
+POST /api/auth/users/resend_activation/
+Content-Type: application/json
+
+{
+  "email": "user@example.com"
+}
+```
+
+Response:
+
+Returns HTTP 204 on success.
+
+After requesting activation link, check the console email output.
+The activation link looks like:
+`/activate/<uid>/<token>/`
+
+Use `<uid>` and `<token>` (remove the line break and the trailing `=` character) in user activation request.
 
 ### Obtain tokens
 
@@ -157,28 +227,6 @@ Content-Type: application/json
 - Blacklists the refresh token
 - Idempotent: calling logout multiple times is safe
 - Returns HTTP 204 on success
-
-### Create user (signup)
-
-```http
-POST /api/auth/users/
-Content-Type: application/json
-
-{
-    "email": "user@example.com",
-    "password": "Qq12345678",
-    "re_password": "Qq12345678"
-}
-```
-
-Response:
-
-```json
-{
-  "email": "user@example.com",
-  "id": 2
-}
-```
 
 ### Get current user
 

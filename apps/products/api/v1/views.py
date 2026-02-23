@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import AllowAny, IsAdminUser
 
 from apps.products.api.v1.serializers import (
     BrandSerializer,
@@ -23,15 +23,22 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     pagination_class = None
 
 
-class ProductViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Product.objects.active()
-    serializer_class = ProductSerializer
+class ProductViewSet(viewsets.ModelViewSet):
+    def _is_admin(self) -> bool:
+        return bool(self.request.user and self.request.user.is_staff)
 
+    def get_permissions(self):
+        if self.action in ["list", "retrieve"]:
+            return [AllowAny()]
+        return [IsAdminUser()]
 
-class ProductAdminViewSet(viewsets.ModelViewSet):
-    serializer_class = ProductAdminSerializer
-    permission_classes = [IsAdminUser]
-
-    # Avoid accidental queryset reuse if the class is subclassed later
+    # N.B. Using method also avoids accidental queryset reuse if the class is subclassed later
     def get_queryset(self):
-        return Product.objects.all()
+        if self._is_admin():
+            return Product.objects.all()
+        return Product.objects.active()
+
+    def get_serializer_class(self):
+        if self._is_admin():
+            return ProductAdminSerializer
+        return ProductSerializer

@@ -32,8 +32,7 @@ urlpatterns = [
     # Djoser + JWT: registration, activation, password reset
     re_path(r"^api/auth/", include("djoser.urls")),
     # Products
-    path("api/v1/", include("apps.products.api.v1.urls.public")),
-    path("api/v1/admin/", include("apps.products.api.v1.urls.admin")),
+    path("api/v1/", include("apps.products.api.v1.urls")),
     # Swagger
     path(
         "api/v1/schema/",

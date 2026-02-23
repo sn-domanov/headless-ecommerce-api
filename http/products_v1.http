@@ -1,0 +1,41 @@
+@base_url = http://localhost:8000/api/v1
+@auth_url = http://localhost:8000/api/auth
+@brand_id = 1
+@category_id = 1
+
+@staff_email = user@example.com
+@staff_password = Qq12345678
+
+### ------------------
+### Product endpoints
+### ------------------
+
+### List all products (to see inactive products login below using staff account)
+GET {{base_url}}/products/
+
+### Filter by brand
+GET {{base_url}}/products/?brand={{brand_id}}
+
+### Filter by category
+GET {{base_url}}/products/?category={{category_id}}
+
+### Filter by brand and category
+GET {{base_url}}/products/?brand={{brand_id}}&category={{category_id}}
+
+### ----------------
+### Authentication
+### ----------------
+
+### Login using staff account
+POST {{auth_url}}/jwt/create/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "{{staff_email}}",
+    "password": "{{staff_password}}"
+}
+
+### Logout
+POST {{auth_url}}/jwt/logout/ HTTP/1.1
+Content-Type: application/json
+# Cookie-based, no body needed

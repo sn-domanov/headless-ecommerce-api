@@ -24,6 +24,8 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class ProductViewSet(viewsets.ModelViewSet):
+    filterset_fields = ["brand", "category"]
+
     def _is_admin(self) -> bool:
         return bool(self.request.user and self.request.user.is_staff)
 

@@ -215,7 +215,7 @@ Response:
 
 Returns 401 if the token is missing or invalid.
 
-## Logout
+### Logout
 
 ```http
 POST /api/auth/jwt/logout/
@@ -286,3 +286,32 @@ Returns HTTP 204 on success.
 ### Testing with REST Client
 
 All JWT endpoints can be tested via the included `http/auth.http` file with the [VS Code REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client). The file uses variables that must be filled manually (email, passwords, UID, reset token).
+
+## Product endpoints
+
+Interactive API documentation is available at
+`/api/v1/docs/` (powered by [drf-spectacular](https://pypi.org/project/drf-spectacular/))
+
+### Filtering
+
+This project uses [django-filter](https://pypi.org/project/django-filter/) as the default filter backend.
+
+Products (`/api/v1/products/`) support filtering by:
+
+- `brand`
+- `category`
+
+Example:
+```http
+GET /api/v1/products/?brand=1&category=2
+```
+
+### Visibility rules
+
+- Anonymous users can see only active products and a limited set of product fields.
+- Staff users can see all products (including inactive) and all product fields.
+
+### HTTP examples
+
+Example requests are provided in `http/products_v1.http`  
+(for use with the [VS Code REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)).

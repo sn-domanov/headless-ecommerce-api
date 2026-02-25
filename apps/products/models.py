@@ -55,6 +55,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     slug = AutoSlugField(populate_from="name", unique=True)
     description = models.TextField()
+    thumbnail = models.ImageField(upload_to="products/", null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_digital = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)

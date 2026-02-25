@@ -1,8 +1,10 @@
+from autoslug import AutoSlugField
 from django.db import models
 
 
 class Brand(models.Model):
     name = models.CharField(max_length=100, unique=True)
+    slug = AutoSlugField(populate_from="name", unique=True)
 
     class Meta:
         ordering = ["name"]
@@ -13,6 +15,7 @@ class Brand(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
+    slug = AutoSlugField(populate_from="name", unique=True)
     # Using adjacency list for MVP. Can be replaced with MPTT (currently unmaintained) or treebeard.
     parent = models.ForeignKey(
         to="self",
@@ -50,6 +53,7 @@ class Product(models.Model):
         to=Brand, on_delete=models.CASCADE, related_name="products"
     )
     name = models.CharField(max_length=100)
+    slug = AutoSlugField(populate_from="name", unique=True)
     description = models.TextField()
     is_active = models.BooleanField(default=True)
     is_digital = models.BooleanField(default=False)

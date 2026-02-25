@@ -6,7 +6,7 @@ from apps.products.models import Brand, Category, Product
 class BrandSerializer(serializers.ModelSerializer):
     class Meta:
         model = Brand
-        fields = ["id", "name"]
+        fields = ["id", "slug", "name"]
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -14,13 +14,13 @@ class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = ["id", "name", "parent", "parent_name"]
+        fields = ["id", "slug", "name", "parent", "parent_name"]
 
 
 class CategoryBriefSerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ["id", "name"]
+        fields = ["id", "slug", "name"]
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -29,7 +29,15 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ["id", "name", "description", "category", "brand", "is_digital"]
+        fields = [
+            "id",
+            "slug",
+            "name",
+            "description",
+            "category",
+            "brand",
+            "is_digital",
+        ]
 
 
 class ProductAdminSerializer(serializers.ModelSerializer):

@@ -7,3 +7,4 @@ djangorestframework-simplejwt
 djoser
 django-cors-headers
 django-filter
+django-autoslug

@@ -1,0 +1,290 @@
+[
+{
+  "model": "products.category",
+  "pk": 1,
+  "fields": {
+    "name": "Beauty",
+    "slug": "beauty",
+    "parent": null
+  }
+},
+{
+  "model": "products.category",
+  "pk": 2,
+  "fields": {
+    "name": "Fragrances",
+    "slug": "fragrances",
+    "parent": 1
+  }
+},
+{
+  "model": "products.category",
+  "pk": 3,
+  "fields": {
+    "name": "Furniture",
+    "slug": "furniture",
+    "parent": null
+  }
+},
+{
+  "model": "products.category",
+  "pk": 4,
+  "fields": {
+    "name": "Groceries",
+    "slug": "groceries",
+    "parent": null
+  }
+},
+{
+  "model": "products.category",
+  "pk": 5,
+  "fields": {
+    "name": "Home Decoration",
+    "slug": "home-decoration",
+    "parent": 3
+  }
+},
+{
+  "model": "products.category",
+  "pk": 6,
+  "fields": {
+    "name": "Kitchen",
+    "slug": "kitchen",
+    "parent": null
+  }
+},
+{
+  "model": "products.category",
+  "pk": 7,
+  "fields": {
+    "name": "Kitchen Accessories",
+    "slug": "kitchen-accessories",
+    "parent": 6
+  }
+},
+{
+  "model": "products.category",
+  "pk": 8,
+  "fields": {
+    "name": "Computers",
+    "slug": "computers",
+    "parent": null
+  }
+},
+{
+  "model": "products.category",
+  "pk": 9,
+  "fields": {
+    "name": "Laptops",
+    "slug": "laptops",
+    "parent": 8
+  }
+},
+{
+  "model": "products.category",
+  "pk": 10,
+  "fields": {
+    "name": "Men's Fashion",
+    "slug": "mens-fashion",
+    "parent": null
+  }
+},
+{
+  "model": "products.category",
+  "pk": 11,
+  "fields": {
+    "name": "Men's Shirts",
+    "slug": "mens-shirts",
+    "parent": 10
+  }
+},
+{
+  "model": "products.category",
+  "pk": 12,
+  "fields": {
+    "name": "Men's Shoes",
+    "slug": "mens-shoes",
+    "parent": 10
+  }
+},
+{
+  "model": "products.category",
+  "pk": 13,
+  "fields": {
+    "name": "Men's Watches",
+    "slug": "mens-watches",
+    "parent": 10
+  }
+},
+{
+  "model": "products.category",
+  "pk": 14,
+  "fields": {
+    "name": "Electronics",
+    "slug": "electronics",
+    "parent": null
+  }
+},
+{
+  "model": "products.category",
+  "pk": 15,
+  "fields": {
+    "name": "Smartphones & Accessories",
+    "slug": "smartphones-accessories",
+    "parent": 14
+  }
+},
+{
+  "model": "products.category",
+  "pk": 16,
+  "fields": {
+    "name": "Mobile Accessories",
+    "slug": "mobile-accessories",
+    "parent": 15
+  }
+},
+{
+  "model": "products.category",
+  "pk": 17,
+  "fields": {
+    "name": "Automotive",
+    "slug": "automotive",
+    "parent": null
+  }
+},
+{
+  "model": "products.category",
+  "pk": 18,
+  "fields": {
+    "name": "Motorcycle",
+    "slug": "motorcycle",
+    "parent": 17
+  }
+},
+{
+  "model": "products.category",
+  "pk": 19,
+  "fields": {
+    "name": "Skin Care",
+    "slug": "skin-care",
+    "parent": 1
+  }
+},
+{
+  "model": "products.category",
+  "pk": 20,
+  "fields": {
+    "name": "Smartphones",
+    "slug": "smartphones",
+    "parent": 15
+  }
+},
+{
+  "model": "products.category",
+  "pk": 21,
+  "fields": {
+    "name": "Sports and Outdoors",
+    "slug": "sports-and-outdoors",
+    "parent": null
+  }
+},
+{
+  "model": "products.category",
+  "pk": 22,
+  "fields": {
+    "name": "Sports Accessories",
+    "slug": "sports-accessories",
+    "parent": 21
+  }
+},
+{
+  "model": "products.category",
+  "pk": 23,
+  "fields": {
+    "name": "Sunglasses",
+    "slug": "sunglasses",
+    "parent": 21
+  }
+},
+{
+  "model": "products.category",
+  "pk": 24,
+  "fields": {
+    "name": "Tablets",
+    "slug": "tablets",
+    "parent": 14
+  }
+},
+{
+  "model": "products.category",
+  "pk": 25,
+  "fields": {
+    "name": "Women's Fashion",
+    "slug": "womens-fashion",
+    "parent": null
+  }
+},
+{
+  "model": "products.category",
+  "pk": 26,
+  "fields": {
+    "name": "Tops",
+    "slug": "tops",
+    "parent": 25
+  }
+},
+{
+  "model": "products.category",
+  "pk": 27,
+  "fields": {
+    "name": "Vehicle",
+    "slug": "vehicle",
+    "parent": 17
+  }
+},
+{
+  "model": "products.category",
+  "pk": 28,
+  "fields": {
+    "name": "Women's Bags",
+    "slug": "womens-bags",
+    "parent": 25
+  }
+},
+{
+  "model": "products.category",
+  "pk": 29,
+  "fields": {
+    "name": "Women's Dresses",
+    "slug": "womens-dresses",
+    "parent": 25
+  }
+},
+{
+  "model": "products.category",
+  "pk": 30,
+  "fields": {
+    "name": "Women's Jewellery",
+    "slug": "womens-jewellery",
+    "parent": 25
+  }
+},
+{
+  "model": "products.category",
+  "pk": 31,
+  "fields": {
+    "name": "Women's Shoes",
+    "slug": "womens-shoes",
+    "parent": 25
+  }
+},
+{
+  "model": "products.category",
+  "pk": 32,
+  "fields": {
+    "name": "Women's Watches",
+    "slug": "womens-watches",
+    "parent": 25
+  }
+}
+]

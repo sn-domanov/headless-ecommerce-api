@@ -21,12 +21,6 @@ class CategoryModelTestCase(TestCase):
         self.assertEqual(child.parent, root)
         self.assertIn(child, root.children.all())
 
-    def test_unique_category_per_parent(self):
-        root = Category.objects.create(name="Root")
-        Category.objects.create(name="Child", parent=root)
-        with self.assertRaises(IntegrityError):
-            Category.objects.create(name="Child", parent=root)
-
 
 class ProductModelTestCase(TestCase):
     @classmethod

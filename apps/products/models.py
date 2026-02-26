@@ -32,12 +32,6 @@ class Category(models.Model):
     class Meta:
         verbose_name = "category"
         verbose_name_plural = "categories"
-        constraints = [
-            models.UniqueConstraint(
-                fields=["parent", "name"],
-                name="unique_category_per_parent",
-            )
-        ]
         ordering = ["name"]
 
     def __str__(self) -> str:

@@ -1,7 +1,11 @@
 from django.contrib import admin
 from django.utils.html import format_html
 
-from apps.products.models import Brand, Category, Product
+from apps.products.models import Brand, Category, Product, ProductImage
+
+
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
 
 
 @admin.register(Brand)
@@ -30,6 +34,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_display_links = ("name",)
     list_filter = ("is_active", "is_digital", "category", "brand")
     search_fields = ("name", "description")
+    inlines = (ProductImageInline,)
 
     def thumbnail_preview(self, obj):
         if obj.thumbnail:

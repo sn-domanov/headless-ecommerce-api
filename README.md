@@ -37,6 +37,18 @@ python manage.py runserver
 The API will be available at:
 http://127.0.0.1:8000/
 
+## Populating the database
+
+This project includes a management command to populate categories, brands, and products using the [DummyJSON](https://dummyjson.com/) API
+```sh
+python manage.py seed_from_dummyjson
+```
+
+Supported options:
+- `--limit`: number of products to import (default: 10)
+- `--skip`: number of products to skip (default: 0)
+- `--download-images`: download thumbnails and product images (default: `False`)
+
 ## Running tests
 
 Tests are run using pytest:
@@ -57,6 +69,12 @@ The default settings module is `config.settings.dev`.
 
 The Django admin panel is available at:
 http://127.0.0.1:8000/admin/
+
+To access it, create a superuser by running:
+
+```sh
+python manage.py createsuperuser
+```
 
 ## Authentication
 
@@ -298,18 +316,19 @@ This project uses [django-filter](https://pypi.org/project/django-filter/) as th
 
 Products (`/api/v1/products/`) support filtering by:
 
-- `brand`
-- `category`
+- `brand` (filter by slug)
+- `category` (filter by slug)
 
 Example:
+
 ```http
-GET /api/v1/products/?brand=1&category=2
+GET /api/v1/products/?brand=brand-slug&category=category-slug
 ```
 
 ### Visibility rules
 
-- Anonymous users can see only active products and a limited set of product fields.
-- Staff users can see all products (including inactive) and all product fields.
+- Anonymous users can see **only active products** and a limited set of product fields.
+- Staff users can see **all products** (including inactive) and all product fields.
 
 ### HTTP examples
 

@@ -1,3 +1,4 @@
+from django.db.models import Prefetch
 from django_filters import CharFilter, FilterSet
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAdminUser
@@ -8,7 +9,7 @@ from apps.products.api.v1.serializers import (
     ProductAdminSerializer,
     ProductSerializer,
 )
-from apps.products.models import Brand, Category, Product
+from apps.products.models import Brand, Category, Product, ProductImage
 
 
 class ProductFilter(FilterSet):
@@ -46,9 +47,14 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     # N.B. Using method also avoids accidental queryset reuse if the class is subclassed later
     def get_queryset(self):
-        if self._is_admin():
-            return Product.objects.all()
-        return Product.objects.active()
+        qs = Product.objects.all()
+
+        if not self._is_admin():
+            qs = qs.active()
+
+        return qs.select_related("brand", "category").prefetch_related(
+            Prefetch("images", queryset=ProductImage.objects.active())
+        )
 
     def get_serializer_class(self):
         if self._is_admin():

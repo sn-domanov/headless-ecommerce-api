@@ -71,6 +71,11 @@ class Product(models.Model):
         return str(self.name)
 
 
+class ProductImageQuerySet(models.QuerySet):
+    def active(self):
+        return self.filter(is_active=True)
+
+
 class ProductImage(models.Model):
     product = models.ForeignKey(
         to=Product, on_delete=models.CASCADE, related_name="images"
@@ -82,6 +87,8 @@ class ProductImage(models.Model):
     order = models.PositiveSmallIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    objects = ProductImageQuerySet.as_manager()
 
     class Meta:
         ordering = ["order", "id"]

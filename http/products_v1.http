@@ -1,7 +1,7 @@
 @base_url = http://localhost:8000/api/v1
 @auth_url = http://localhost:8000/api/auth
-@brand_id = 1
-@category_id = 1
+@brand_slug = paste-brand-slug-here
+@category_slug = paste-category-slug-here
 
 @staff_email = user@example.com
 @staff_password = Qq12345678
@@ -10,17 +10,23 @@
 ### Product endpoints
 ### ------------------
 
+### List all brands
+GET {{base_url}}/brands/ HTTP/1.1
+
+### List all categories
+GET {{base_url}}/categories/ HTTP/1.1
+
 ### List all products (to see inactive products login below using staff account)
-GET {{base_url}}/products/
+GET {{base_url}}/products/ HTTP/1.1
 
-### Filter by brand
-GET {{base_url}}/products/?brand={{brand_id}}
+### Filter products by brand
+GET {{base_url}}/products/?brand={{brand_slug}} HTTP/1.1
 
-### Filter by category
-GET {{base_url}}/products/?category={{category_id}}
+### Filter products by category
+GET {{base_url}}/products/?category={{category_slug}} HTTP/1.1
 
-### Filter by brand and category
-GET {{base_url}}/products/?brand={{brand_id}}&category={{category_id}}
+### Filter products by brand and category
+GET {{base_url}}/products/?brand={{brand_slug}}&category={{category_slug}} HTTP/1.1
 
 ### ----------------
 ### Authentication

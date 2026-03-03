@@ -10,11 +10,12 @@ class BrandSerializer(serializers.ModelSerializer):
 
 
 class CategorySerializer(serializers.ModelSerializer):
+    parent_slug = serializers.SlugField(source="parent.slug", read_only=True)
     parent_name = serializers.CharField(source="parent.name", read_only=True)
 
     class Meta:
         model = Category
-        fields = ["slug", "name", "parent", "parent_name"]
+        fields = ["slug", "name", "parent_slug", "parent_name"]
 
 
 class CategoryBriefSerializer(serializers.ModelSerializer):

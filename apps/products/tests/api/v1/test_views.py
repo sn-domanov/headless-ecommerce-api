@@ -73,6 +73,78 @@ class ProductViewSetTest(APITestCase):
         self.assertIn(self.active_product.name, names)
         self.assertIn(self.inactive_product.name, names)
 
+    def test_category_filter_includes_descendants_products(self):
+        parent = Category.objects.create(name="parent")
+        child = Category.objects.create(name="child", parent=parent)
+        grandchild = Category.objects.create(name="grandchild", parent=child)
+        product_a = Product.objects.create(
+            name="A",
+            description="A",
+            brand=self.brand,
+            category=parent,
+            is_active=True,
+        )
+        product_b = Product.objects.create(
+            name="B",
+            description="B",
+            brand=self.brand,
+            category=child,
+            is_active=True,
+        )
+        product_c = Product.objects.create(
+            name="C",
+            description="C",
+            brand=self.brand,
+            category=grandchild,
+            is_active=True,
+        )
+
+        response = self.client.get(self.list_url, {"category": parent.slug})
+        names = [p["name"] for p in response.data["results"]]
+
+        self.assertIn(product_a.name, names)
+        self.assertIn(product_b.name, names)
+        self.assertIn(product_c.name, names)
+
+    def test_category_filter_excludes_parent_products(self):
+        parent = Category.objects.create(name="parent")
+        child = Category.objects.create(name="child", parent=parent)
+        product_a = Product.objects.create(
+            name="A",
+            description="A",
+            brand=self.brand,
+            category=parent,
+            is_active=True,
+        )
+
+        product_b = Product.objects.create(
+            name="B",
+            description="B",
+            brand=self.brand,
+            category=child,
+            is_active=True,
+        )
+
+        response = self.client.get(self.list_url, {"category": child.slug})
+        names = [p["name"] for p in response.data["results"]]
+
+        self.assertNotIn(product_a.name, names)
+        self.assertIn(product_b.name, names)
+
+    def test_invalid_category_filter_returns_empty_list(self):
+        category = Category.objects.create(name="A")
+        product_a = Product.objects.create(
+            name="A",
+            description="A",
+            brand=self.brand,
+            category=category,
+            is_active=True,
+        )
+
+        response = self.client.get(self.list_url, {"category": "B"})
+
+        self.assertEqual(response.data["results"], [])
+
     # Write tests
     def test_non_admin_cannot_create_product(self):
         self.client.force_authenticate(user=self.user)

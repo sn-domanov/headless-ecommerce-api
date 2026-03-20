@@ -37,6 +37,16 @@ class Category(models.Model):
     def __str__(self) -> str:
         return str(self.name)
 
+    def get_descendants(self, include_self: bool) -> list:
+        descendants = [self] if include_self else []
+
+        children = list(self.children.all())
+        descendants.extend(self.children.all())
+
+        for child in children:
+            descendants.extend(child.get_descendants(include_self=False))
+        return descendants
+
 
 class ProductQuerySet(models.QuerySet):
     def active(self):

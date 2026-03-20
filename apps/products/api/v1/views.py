@@ -14,11 +14,21 @@ from apps.products.models import Brand, Category, Product, ProductImage
 
 class ProductFilter(FilterSet):
     brand = CharFilter(field_name="brand__slug", lookup_expr="exact")
-    category = CharFilter(field_name="category__slug", lookup_expr="exact")
+    category = CharFilter(method="filter_category")
 
     class Meta:
         model = Product
         fields = ["brand", "category"]
+
+    def filter_category(self, queryset, name, value):
+        try:
+            category = Category.objects.get(slug=value)
+        except Category.DoesNotExist:
+            return queryset.none()
+
+        descendants = category.get_descendants(include_self=True)
+
+        return queryset.filter(category__in=descendants)
 
 
 class BrandViewSet(viewsets.ReadOnlyModelViewSet):

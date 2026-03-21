@@ -33,6 +33,7 @@ class ProductFilter(FilterSet):
 
 class BrandViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Brand.objects.all()
+    lookup_field = "slug"
     serializer_class = BrandSerializer
     # Disable the default pagination set in config.settings.base
     pagination_class = None
@@ -40,6 +41,7 @@ class BrandViewSet(viewsets.ReadOnlyModelViewSet):
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Category.objects.all()
+    lookup_field = "slug"
     serializer_class = CategorySerializer
     pagination_class = None
 

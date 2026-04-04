@@ -1,11 +1,29 @@
 from django.contrib import admin
 from django.utils.html import format_html
+from nested_admin.nested import (
+    NestedModelAdmin,
+    NestedStackedInline,
+    NestedTabularInline,
+)
 
-from apps.products.models import Brand, Category, Product, ProductImage
+from apps.products.models import (
+    Brand,
+    Category,
+    Product,
+    Variant,
+    VariantImage,
+)
 
 
-class ProductImageInline(admin.TabularInline):
-    model = ProductImage
+class VariantImageInline(NestedTabularInline):
+    model = VariantImage
+    extra = 1
+
+
+class VariantInline(NestedStackedInline):
+    model = Variant
+    inlines = [VariantImageInline]
+    extra = 1
 
 
 @admin.register(Brand)
@@ -21,7 +39,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 @admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(NestedModelAdmin):
     list_display = (
         "thumbnail_preview",
         "name",
@@ -29,12 +47,11 @@ class ProductAdmin(admin.ModelAdmin):
         "category",
         "brand",
         "is_active",
-        "is_digital",
     )
     list_display_links = ("name",)
-    list_filter = ("is_active", "is_digital", "category", "brand")
+    list_filter = ("is_active", "category", "brand")
     search_fields = ("name", "description")
-    inlines = (ProductImageInline,)
+    inlines = (VariantInline,)
 
     def thumbnail_preview(self, obj):
         if obj.thumbnail:

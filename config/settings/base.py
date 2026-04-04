@@ -48,6 +48,7 @@ THIRD_PARTY_APPS = [
     "djoser",
     "corsheaders",
     "django_filters",
+    "nested_admin",
 ]
 
 LOCAL_APPS = [

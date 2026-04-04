@@ -5,7 +5,7 @@ from django.core.files.base import ContentFile
 from django.core.management import call_command
 from django.core.management.base import BaseCommand
 
-from apps.products.models import Brand, Category, Product
+from apps.products.models import Brand, Category, Product, Variant
 
 
 class Command(BaseCommand):
@@ -84,11 +84,18 @@ class Command(BaseCommand):
                     "category": category,
                     "brand": brand,
                     "description": product["description"],
-                    "is_digital": False,
                 },
             )
 
-            # Thumbnail
+            # Product variant
+            variant_obj, variant_created = Variant.objects.get_or_create(
+                sku=product["sku"],
+                defaults={
+                    "product": product_obj,
+                },
+            )
+
+            # Product thumbnail
             thumbnail_url = product.get("thumbnail")
             # Download for newly created objects only
             if download_images and product_created and thumbnail_url:
@@ -100,15 +107,17 @@ class Command(BaseCommand):
                         save=True,
                     )
 
-            # Product images
+            # Variant images
             images_list = product.get("images")
-            if download_images and product_created and images_list:
+            if download_images and variant_created and images_list:
                 for idx, url in enumerate(images_list):
                     file = self.download_file(url)
                     if file:
-                        image_obj = product_obj.images.create()
+                        image_obj = variant_obj.images.create(
+                            alt_text=f"Image of product: {product_obj.name}, variant: {variant_obj.sku}"
+                        )
                         image_obj.image.save(
-                            f"{product_obj.slug}-{idx}.webp",
+                            f"{variant_obj.sku}-{idx}.webp",
                             file,
                             save=True,
                         )

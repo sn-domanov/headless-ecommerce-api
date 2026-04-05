@@ -47,8 +47,9 @@ THIRD_PARTY_APPS = [
     "rest_framework_simplejwt.token_blacklist",
     "djoser",
     "corsheaders",
-    "django_filters",
+    "treebeard",
     "nested_admin",
+    "django_filters",
 ]
 
 LOCAL_APPS = [

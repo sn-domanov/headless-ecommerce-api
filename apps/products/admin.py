@@ -5,6 +5,8 @@ from nested_admin.nested import (
     NestedStackedInline,
     NestedTabularInline,
 )
+from treebeard.admin import TreeAdmin
+from treebeard.forms import movenodeform_factory
 
 from apps.products.models import (
     Brand,
@@ -33,8 +35,9 @@ class BrandAdmin(admin.ModelAdmin):
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = ("name", "slug", "parent")
+class CategoryAdmin(TreeAdmin):
+    form = movenodeform_factory(Category)
+    list_display = ("name", "slug")
     search_fields = ("name",)
 
 

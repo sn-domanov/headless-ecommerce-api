@@ -1,0 +1,354 @@
+[
+{
+  "model": "products.category",
+  "pk": 1,
+  "fields": {
+    "path": "0002",
+    "depth": 1,
+    "numchild": 2,
+    "name": "Beauty",
+    "slug": "beauty"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 2,
+  "fields": {
+    "path": "00020002",
+    "depth": 2,
+    "numchild": 0,
+    "name": "Fragrances",
+    "slug": "fragrances"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 3,
+  "fields": {
+    "path": "0005",
+    "depth": 1,
+    "numchild": 1,
+    "name": "Furniture",
+    "slug": "furniture"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 4,
+  "fields": {
+    "path": "0006",
+    "depth": 1,
+    "numchild": 0,
+    "name": "Groceries",
+    "slug": "groceries"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 5,
+  "fields": {
+    "path": "00050002",
+    "depth": 2,
+    "numchild": 0,
+    "name": "Home Decoration",
+    "slug": "home-decoration"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 6,
+  "fields": {
+    "path": "0007",
+    "depth": 1,
+    "numchild": 1,
+    "name": "Kitchen",
+    "slug": "kitchen"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 7,
+  "fields": {
+    "path": "00070002",
+    "depth": 2,
+    "numchild": 0,
+    "name": "Kitchen Accessories",
+    "slug": "kitchen-accessories"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 8,
+  "fields": {
+    "path": "0003",
+    "depth": 1,
+    "numchild": 1,
+    "name": "Computers",
+    "slug": "computers"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 9,
+  "fields": {
+    "path": "00030002",
+    "depth": 2,
+    "numchild": 0,
+    "name": "Laptops",
+    "slug": "laptops"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 10,
+  "fields": {
+    "path": "0008",
+    "depth": 1,
+    "numchild": 3,
+    "name": "Men's Fashion",
+    "slug": "mens-fashion"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 11,
+  "fields": {
+    "path": "00080002",
+    "depth": 2,
+    "numchild": 0,
+    "name": "Men's Shirts",
+    "slug": "mens-shirts"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 12,
+  "fields": {
+    "path": "00080004",
+    "depth": 2,
+    "numchild": 0,
+    "name": "Men's Shoes",
+    "slug": "mens-shoes"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 13,
+  "fields": {
+    "path": "00080006",
+    "depth": 2,
+    "numchild": 0,
+    "name": "Men's Watches",
+    "slug": "mens-watches"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 14,
+  "fields": {
+    "path": "0004",
+    "depth": 1,
+    "numchild": 2,
+    "name": "Electronics",
+    "slug": "electronics"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 15,
+  "fields": {
+    "path": "00040002",
+    "depth": 2,
+    "numchild": 2,
+    "name": "Smartphones & Accessories",
+    "slug": "smartphones-accessories"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 16,
+  "fields": {
+    "path": "000400020002",
+    "depth": 3,
+    "numchild": 0,
+    "name": "Mobile Accessories",
+    "slug": "mobile-accessories"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 17,
+  "fields": {
+    "path": "0001",
+    "depth": 1,
+    "numchild": 2,
+    "name": "Automotive",
+    "slug": "automotive"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 18,
+  "fields": {
+    "path": "00010002",
+    "depth": 2,
+    "numchild": 0,
+    "name": "Motorcycle",
+    "slug": "motorcycle"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 19,
+  "fields": {
+    "path": "00020004",
+    "depth": 2,
+    "numchild": 0,
+    "name": "Skin Care",
+    "slug": "skin-care"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 20,
+  "fields": {
+    "path": "000400020004",
+    "depth": 3,
+    "numchild": 0,
+    "name": "Smartphones",
+    "slug": "smartphones"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 21,
+  "fields": {
+    "path": "0009",
+    "depth": 1,
+    "numchild": 2,
+    "name": "Sports and Outdoors",
+    "slug": "sports-and-outdoors"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 22,
+  "fields": {
+    "path": "00090002",
+    "depth": 2,
+    "numchild": 0,
+    "name": "Sports Accessories",
+    "slug": "sports-accessories"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 23,
+  "fields": {
+    "path": "00090004",
+    "depth": 2,
+    "numchild": 0,
+    "name": "Sunglasses",
+    "slug": "sunglasses"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 24,
+  "fields": {
+    "path": "00040004",
+    "depth": 2,
+    "numchild": 0,
+    "name": "Tablets",
+    "slug": "tablets"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 25,
+  "fields": {
+    "path": "000A",
+    "depth": 1,
+    "numchild": 6,
+    "name": "Women's Fashion",
+    "slug": "womens-fashion"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 26,
+  "fields": {
+    "path": "000A0002",
+    "depth": 2,
+    "numchild": 0,
+    "name": "Tops",
+    "slug": "tops"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 27,
+  "fields": {
+    "path": "00010004",
+    "depth": 2,
+    "numchild": 0,
+    "name": "Vehicle",
+    "slug": "vehicle"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 28,
+  "fields": {
+    "path": "000A0004",
+    "depth": 2,
+    "numchild": 0,
+    "name": "Women's Bags",
+    "slug": "womens-bags"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 29,
+  "fields": {
+    "path": "000A0006",
+    "depth": 2,
+    "numchild": 0,
+    "name": "Women's Dresses",
+    "slug": "womens-dresses"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 30,
+  "fields": {
+    "path": "000A0008",
+    "depth": 2,
+    "numchild": 0,
+    "name": "Womens Jewellery",
+    "slug": "womens-jewellery"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 31,
+  "fields": {
+    "path": "000A000A",
+    "depth": 2,
+    "numchild": 0,
+    "name": "Women's Shoes",
+    "slug": "womens-shoes"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 32,
+  "fields": {
+    "path": "000A000C",
+    "depth": 2,
+    "numchild": 0,
+    "name": "Women's Watches",
+    "slug": "womens-watches"
+  }
+}
+]

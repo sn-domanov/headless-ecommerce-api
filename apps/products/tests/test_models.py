@@ -35,23 +35,23 @@ class BrandModelTest(TestCase):
 class CategoryModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.category = Category.objects.create(name="Test category")
+        cls.category = Category.add_root(name="Test category")
 
     def test_slug_is_generated_from_name(self):
         self.assertEqual(self.category.slug, "test-category")
 
     def test_slug_is_unique(self):
-        first = Category.objects.create(name="Same Name")
-        second = Category.objects.create(name="Same Name")
+        first = Category.add_root(name="Same Name")
+        second = Category.add_root(name="Same Name")
 
         self.assertNotEqual(first.slug, second.slug)
 
     def test_category_hierarchy(self):
-        root = Category.objects.create(name="Root")
-        child = Category.objects.create(name="Child", parent=root)
+        root = Category.add_root(name="Root")
+        child = root.add_child(name="Child")
 
-        self.assertEqual(child.parent, root)
-        self.assertIn(child, root.children.all())
+        self.assertEqual(child.get_parent(), root)
+        self.assertIn(child, root.get_children())
 
     def test_str_returns_name(self):
         self.assertEqual(str(self.category), "Test category")
@@ -61,7 +61,7 @@ class ProductModelTest(TestCase):
     @classmethod
     def setUpTestData(cls) -> None:
         cls.brand = Brand.objects.create(name="Test brand")
-        cls.category = Category.objects.create(name="Test category")
+        cls.category = Category.add_root(name="Test category")
         cls.product = Product.objects.create(
             brand=cls.brand,
             category=cls.category,
@@ -120,7 +120,7 @@ class VariantModelTest(TestCase):
     @classmethod
     def setUpTestData(cls) -> None:
         cls.brand = Brand.objects.create(name="Test brand")
-        cls.category = Category.objects.create(name="Test category")
+        cls.category = Category.add_root(name="Test category")
         cls.product = Product.objects.create(
             brand=cls.brand, category=cls.category, name="Test product"
         )
@@ -166,7 +166,7 @@ class VariantImageModelTest(TestCase):
     @classmethod
     def setUpTestData(cls) -> None:
         cls.brand = Brand.objects.create(name="Test brand")
-        cls.category = Category.objects.create(name="Test category")
+        cls.category = Category.add_root(name="Test category")
         cls.product = Product.objects.create(
             brand=cls.brand, category=cls.category, name="Test product"
         )

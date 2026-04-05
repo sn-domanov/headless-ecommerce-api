@@ -47,7 +47,7 @@ class Command(BaseCommand):
 
         if not Category.objects.exists():
             self.stdout.write("Loading categories fixture")
-            call_command("loaddata", "apps/products/fixtures/category.json")
+            call_command("loaddata", "apps/products/fixtures/category_mp.json")
 
         # Fetch products from DummyJSON
         self.stdout.write(f"Fetching products from {source_url}")

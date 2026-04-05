@@ -1,6 +1,7 @@
 import uuid6
 from autoslug import AutoSlugField
 from django.db import models
+from treebeard.mp_tree import MP_Node
 
 
 def product_thumbnail_upload_path(instance, filename) -> str:
@@ -23,17 +24,11 @@ class Brand(models.Model):
         return str(self.name)
 
 
-class Category(models.Model):
+class Category(MP_Node):
     name = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from="name", unique=True)
-    # Using adjacency list for MVP. Can be replaced with MPTT (currently unmaintained) or treebeard.
-    parent = models.ForeignKey(
-        to="self",
-        null=True,
-        blank=True,
-        on_delete=models.PROTECT,
-        related_name="children",
-    )
+
+    node_order_by = ["name"]
 
     class Meta:
         verbose_name = "category"
@@ -42,17 +37,6 @@ class Category(models.Model):
 
     def __str__(self) -> str:
         return str(self.name)
-
-    # TODO switch to django-treebeard
-    def get_descendants(self, include_self: bool) -> list:
-        descendants = [self] if include_self else []
-
-        children = list(self.children.all())
-        descendants.extend(self.children.all())
-
-        for child in children:
-            descendants.extend(child.get_descendants(include_self=False))
-        return descendants
 
 
 class ProductQuerySet(models.QuerySet):

@@ -2,7 +2,9 @@
 @auth_url = http://localhost:8000/api/auth
 @brand_slug = paste-brand-slug-here
 @category_slug = paste-category-slug-here
-
+@product-slug = paste-product-slug-here
+@variant_uuid = paste-product-variant-uuid-here
+@variant_image_uuid = paste-product-variant-image-uuid-here
 @staff_email = user@example.com
 @staff_password = Qq12345678
 
@@ -27,6 +29,22 @@ GET {{base_url}}/products/?category={{category_slug}} HTTP/1.1
 
 ### Filter products by brand and category
 GET {{base_url}}/products/?brand={{brand_slug}}&category={{category_slug}} HTTP/1.1
+
+### Retrieve a product
+GET {{base_url}}/products/{{product-slug}}/ HTTP/1.1
+
+### List all product variants (login using staff account)
+GET {{base_url}}/variants/ HTTP/1.1
+
+### Retrieve a product variant
+GET {{base_url}}/variants/{{variant_uuid}}/ HTTP/1.1
+
+
+### List all product (product variant) images (login using staff account)
+GET {{base_url}}/variant-images/ HTTP/1.1
+
+### Retrieve a product (product variant) image
+GET {{base_url}}/variant-images/{{variant_image_uuid}}/ HTTP/1.1
 
 ### ----------------
 ### Authentication

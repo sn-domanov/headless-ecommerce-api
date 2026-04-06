@@ -9,3 +9,6 @@ django-cors-headers
 django-filter
 django-autoslug
 pillow
+uuid6
+django-treebeard
+django-nested-admin

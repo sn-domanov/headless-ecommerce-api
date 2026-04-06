@@ -1,11 +1,31 @@
 from django.contrib import admin
 from django.utils.html import format_html
+from nested_admin.nested import (
+    NestedModelAdmin,
+    NestedStackedInline,
+    NestedTabularInline,
+)
+from treebeard.admin import TreeAdmin
+from treebeard.forms import movenodeform_factory
 
-from apps.products.models import Brand, Category, Product, ProductImage
+from apps.products.models import (
+    Brand,
+    Category,
+    Product,
+    Variant,
+    VariantImage,
+)
 
 
-class ProductImageInline(admin.TabularInline):
-    model = ProductImage
+class VariantImageInline(NestedTabularInline):
+    model = VariantImage
+    extra = 1
+
+
+class VariantInline(NestedStackedInline):
+    model = Variant
+    inlines = [VariantImageInline]
+    extra = 1
 
 
 @admin.register(Brand)
@@ -15,13 +35,14 @@ class BrandAdmin(admin.ModelAdmin):
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = ("name", "slug", "parent")
+class CategoryAdmin(TreeAdmin):
+    form = movenodeform_factory(Category)
+    list_display = ("name", "slug")
     search_fields = ("name",)
 
 
 @admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(NestedModelAdmin):
     list_display = (
         "thumbnail_preview",
         "name",
@@ -29,12 +50,11 @@ class ProductAdmin(admin.ModelAdmin):
         "category",
         "brand",
         "is_active",
-        "is_digital",
     )
     list_display_links = ("name",)
-    list_filter = ("is_active", "is_digital", "category", "brand")
+    list_filter = ("is_active", "category", "brand")
     search_fields = ("name", "description")
-    inlines = (ProductImageInline,)
+    inlines = (VariantInline,)
 
     def thumbnail_preview(self, obj):
         if obj.thumbnail:

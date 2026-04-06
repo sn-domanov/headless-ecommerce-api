@@ -462,6 +462,7 @@ django==6.0.1 \
     #   django-filter
     #   django-stubs
     #   django-stubs-ext
+    #   django-treebeard
     #   djangorestframework
     #   djangorestframework-simplejwt
     #   djoser
@@ -479,6 +480,10 @@ django-filter==25.2 \
     --hash=sha256:760e984a931f4468d096f5541787efb8998c61217b73006163bf2f9523fe8f23 \
     --hash=sha256:9c0f8609057309bba611062fe1b720b4a873652541192d232dd28970383633e3
     # via -r base.txt
+django-nested-admin==4.1.6 \
+    --hash=sha256:0222475cc343e7b8813d7a5db583cddef15f5c0f44dbe17b91b4d682db7bd73a \
+    --hash=sha256:ae3e1d910631e6cc3b5815d80129f18c6c081b7dd7f775bf392d9bb1ac88ef93
+    # via -r base.txt
 django-stubs==5.2.8 \
     --hash=sha256:9bba597c9a8ed8c025cae4696803d5c8be1cf55bfc7648a084cbf864187e2f8b \
     --hash=sha256:a3c63119fd7062ac63d58869698d07c9e5ec0561295c4e700317c54e8d26716c
@@ -489,6 +494,10 @@ django-stubs-ext==5.2.8 \
     --hash=sha256:1dd5470c9675591362c78a157a3cf8aec45d0e7a7f0cf32f227a1363e54e0652 \
     --hash=sha256:b39938c46d7a547cd84e4a6378dbe51a3dd64d70300459087229e5fee27e5c6b
     # via django-stubs
+django-treebeard==5.0.5 \
+    --hash=sha256:879b3103c2d25fb98750e3b61d9bcda58c18e4617f5e1156bbc50a79104c9f1f \
+    --hash=sha256:edca8ef8f92a92d607a1310838fe02806414d0678187316b43b48677aff2f51c
+    # via -r base.txt
 djangorestframework==3.16.1 \
     --hash=sha256:166809528b1aced0a17dc66c24492af18049f2c9420dbd0be29422029cfc3ff7 \
     --hash=sha256:33a59f47fb9c85ede792cbf88bde71893bcda0667bc573f784649521f1102cec
@@ -707,6 +716,12 @@ python-dotenv==1.2.1 \
     --hash=sha256:42667e897e16ab0d66954af0e60a9caa94f0fd4ecf3aaf6d2d260eec1aa36ad6 \
     --hash=sha256:b81ee9561e9ca4004139c6cbba3a238c32b03e4894671e181b671e8cb8425d61
     # via -r base.txt
+python-monkey-business==1.1.0 \
+    --hash=sha256:15b4f603c749ba9a7b4f1acd36af023a6c5ba0f7e591c945f8253f0ef44bf389 \
+    --hash=sha256:8393839cc741415ed5ddc2bd58e2d4ce07f966a7d26b7aebff19dcec64818edc
+    # via
+    #   -r base.txt
+    #   django-nested-admin
 python3-openid==3.2.0 \
     --hash=sha256:33fbf6928f401e0b790151ed2b5290b02545e8775f982485205a066f874aaeaf \
     --hash=sha256:6626f771e0417486701e0b4daff762e7212e820ca5b29fcc0d05f6f8736dfa6b
@@ -1022,3 +1037,7 @@ urllib3==2.6.3 \
     #   -r base.txt
     #   requests
     #   types-requests
+uuid6==2025.0.1 \
+    --hash=sha256:80530ce4d02a93cdf82e7122ca0da3ebbbc269790ec1cb902481fa3e9cc9ff99 \
+    --hash=sha256:cd0af94fa428675a44e32c5319ec5a3485225ba2179eefcf4c3f205ae30a81bd
+    # via -r base.txt

@@ -6,6 +6,8 @@
 @password_reset_token = PASTE_PASSWORD_RESET_TOKEN_HERE
 @user_activation_token = PASTE_USER_ACTIVATION_TOKEN_HERE
 
+### Set csrftoken cookie
+GET {{base_url}}/auth/csrf-token/ HTTP/1.1
 ### Create user (signup)
 POST {{base_url}}/auth/users/ HTTP/1.1
 Content-Type: application/json

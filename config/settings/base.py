@@ -188,3 +188,6 @@ SPECTACULAR_SETTINGS = {
 
 # Security
 CORS_ALLOW_CREDENTIALS = True
+
+# CSRF handling by frontend (default value set explicitly)
+CSRF_COOKIE_HTTPONLY = False

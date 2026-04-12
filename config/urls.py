@@ -26,6 +26,7 @@ from apps.accounts import views as accounts_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("api/auth/csrf-token/", accounts_views.csrf),
     # Secure HttpOnly cookie JWT auth
     path("api/auth/jwt/create/", accounts_views.CookieTokenCreateView.as_view()),
     path("api/auth/jwt/refresh/", accounts_views.CookieTokenRefreshView.as_view()),

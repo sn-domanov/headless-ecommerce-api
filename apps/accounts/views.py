@@ -1,6 +1,8 @@
 from datetime import timedelta
 
 from django.conf import settings
+from django.http import JsonResponse
+from django.views.decorators.csrf import ensure_csrf_cookie
 from rest_framework.permissions import AllowAny
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -18,6 +20,11 @@ refresh_lifetime: timedelta = settings.SIMPLE_JWT["REFRESH_TOKEN_LIFETIME"]
 
 access_max_age = int(access_lifetime.total_seconds())
 refresh_max_age = int(refresh_lifetime.total_seconds())
+
+
+@ensure_csrf_cookie
+def csrf(request):
+    return JsonResponse({"detail": "CSRF cookie set"})
 
 
 class CookieTokenCreateView(TokenObtainPairView):

@@ -81,8 +81,10 @@ python manage.py createsuperuser
 This project uses [Djoser](https://djoser.readthedocs.io/) for user management and
 [SimpleJWT](https://django-rest-framework-simplejwt.readthedocs.io/) for JWT-based authentication.
 
-**Cookie-based JWT**: Access and refresh tokens are stored in **HttpOnly cookies**.  
-This prevents JavaScript from reading tokens directly, improving security.
+**Cookie-based JWT**: Access and refresh tokens are stored in **HttpOnly cookies** (not accessible via JavaScript).  
+
+Because authentication is stored in cookies, Django's CSRF protection (CsrfViewMiddleware) is enabled for all unsafe HTTP methods (POST, PUT, PATCH, DELETE).  
+Clients must include the `X-CSRFToken` header for state-changing requests.
 
 Users created via the API are inactive by default. An activation link is emailed to the user after signup.
 
@@ -90,6 +92,7 @@ Users created via the API are inactive by default. An activation link is emailed
 
 | Path                                          | Method | Purpose                                               |
 |-----------------------------------------------|--------|-------------------------------------------------------|
+| `/api/auth/csrf-token/`                       | GET    | Set `csrftoken` cookie                                |
 | `/api/auth/jwt/create/`                       | POST   | Obtain access and refresh tokens                      |
 | `/api/auth/jwt/refresh/`                      | POST   | Refresh access token                                  |
 | `/api/auth/jwt/verify/`                       | POST   | Verify access token                                   |
